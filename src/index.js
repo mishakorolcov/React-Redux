@@ -1,16 +1,31 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+
 import App from './App';
 
+import createStore from './store';
+const store = createStore();
 
-ReactDOM.render(<App />, document.getElementById('root'));
+setTimeout(function () {
+   store.dispatch({
+       type: 'SET_BOOKS',
+       playload: [
+           {
+               id: 0,
+               title: 'test'
+           }
+       ]
+   });
+}, 1000);
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
+ReactDOM.render(
+    <Provider store={store}>
+        <App />
+    </Provider>
+    ,document.getElementById('root'));
 
 
-// ReactDOM.render(
-//   <h1>Hello word</h1>,
-//   document.getElementById('root')
-// );
+
+
+
